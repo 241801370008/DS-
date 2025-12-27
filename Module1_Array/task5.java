@@ -1,14 +1,9 @@
 // Online Java Compiler
 // Use this editor to write, compile and run your Java code online
 class Student{
-    
-    
     // data fields
     String name;
     int age;
-   
-    
-    
     // method
     void getName(){
         
@@ -21,10 +16,7 @@ class Student{
         
     }
     
-    
 }
-
-
 class Main {
     public static void main(String[] args) {
         System.out.println("Try programiz.pro");
@@ -33,8 +25,6 @@ class Main {
         
         // int result=a.sumoftwo(10,20);
         // System.out.println("result is "+ result);
-        
-        
         Student roll1=new Student();
         
         System.out.println(roll1);
@@ -44,13 +34,6 @@ class Main {
         
         roll1.getName(); 
          roll1.getAge(); 
-        
-        
-        
-        
-        
-        
-        
         
     }
 }
