@@ -1,9 +1,11 @@
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
+
+
+import java.util.Arrays;
 
 class DynamicArray {
-    private int[] arr;
-    private int size;
+
+    private int[] arr;   // internal array
+    private int size;    // current number of elements
 
     // Constructor
     public DynamicArray(int capacity) {
@@ -11,7 +13,7 @@ class DynamicArray {
         size = 0;
     }
 
-    // Append
+    // Append / Push → O(1)
     public void append(int value) {
         if (size == arr.length) {
             System.out.println("Array is full, cannot append");
@@ -21,80 +23,135 @@ class DynamicArray {
         size++;
     }
 
-    // Delete by index
-    public void delete(int idx) {
-        if (size == 0) {
-            System.out.println("Array is empty, cannot delete");
+    // Insert at index → O(n)
+    public void insert(int index ,int value) {
+        if (size == arr.length) {
+            System.out.println("Array is full, cannot insert");
             return;
         }
-
-        if (idx < 0 || idx >= size) {
+        if (index < 0 || index > size) {
             System.out.println("Invalid index");
             return;
         }
 
-        for (int i = idx; i < size - 1; i++) {
+        // shift right
+        for (int i = size; i > index; i--) {
+            arr[i] = arr[i - 1];
+        }
+
+        arr[index] = value;
+        size++;
+    }
+
+    // Delete at index → O(n)
+    public void delete(int index) {
+        if (size == 0) {
+            System.out.println("Array is empty, cannot delete");
+            return;
+        }
+        if (index < 0 || index >= size) {
+            System.out.println("Invalid index");
+            return;
+        }
+
+        // shift left
+        for (int i = index; i < size - 1; i++) {
             arr[i] = arr[i + 1];
         }
+
+        arr[size - 1] = 0; // optional cleanup
         size--;
     }
 
-    // Pop (remove last element)
+    // Pop last element → O(1)
     public void pop() {
         if (size == 0) {
             System.out.println("Array is empty, cannot pop");
             return;
         }
+
+        arr[size - 1] = 0; // optional
         size--;
     }
 
-    // Insert at index
-    public void insert(int idx, int value) {
-        if (size == arr.length) {
-            System.out.println("Array is full, cannot insert");
-            return;
-        }
-
-        if (idx < 0 || idx > size) {
-            System.out.println("Invalid index");
-            return;
-        }
-
-        for (int i = size; i > idx; i--) {
-            arr[i] = arr[i - 1];
-        }
-
-        arr[idx] = value;
-        size++;
-    }
-
-    // Print array
+    // Print array (only valid elements)
     public void print() {
         System.out.print("[ ");
         for (int i = 0; i < size; i++) {
-            System.out.print(arr[i] + " ");
+            System.out.print(arr[i] + ",");
         }
         System.out.println("]");
     }
+
+    // Get current size
+    public int getSize() {
+        return size;
+    }
+
+    // Get capacity
+    public int getCapacity() {
+        return arr.length;
+    }
 }
+
 
 class Main {
     public static void main(String[] args) {
 
-        DynamicArray Da = new DynamicArray(5); // capacity = 5
+        DynamicArray da = new DynamicArray(20);
+        
+        
+        // print 
+        da.print();
 
-        Da.append(100);
-        Da.append(200);
-        Da.append(300);
-        Da.print();
+        // Initial insert
+        
+        da.append(500);
+        
+        
+        
+        da.append(600);
+        
+        da.append(700);
+        
+        da.append(800);
+        
+        da.append(900);
+        
+        int size=da.getSize();
+        
+        
+        
+        
+        da.print();
+        
+        System.out.println("current size "+size);
+        
+        
+        da.pop();
+        
+        da.print();
+        
+        da.insert(2,1000);
+        
+        da.print();
+        
+        
+        System.out.println("current size "+da.getSize());
+        
+        da.insert(3,2000);
+        
+        da.print();
+        
+        da.append(19990);
+        
+        da.print();
+        
+        da.delete(2);
+        da.print();
+        
+        
+ 
 
-        Da.insert(1, 500);
-        Da.print();
-
-        Da.delete(2);
-        Da.print();
-
-        Da.pop();
-        Da.print();
     }
 }
